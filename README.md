@@ -17,6 +17,8 @@ Apache TomEE comes with four different flavors, Web Profile, JAX-RS, Plus and Pl
 * Apache TomEE Plus delivers all that is in the Web Profile and JAX-RS (RESTfull Services), plus EJB Full, Java EE Connector Architecture, JMS (Java Message Service) and JAX-WS (Web Services).
 * Apache TomEE Plume delivers all that is in the Plus Profile, but includes Mojarra and EclipseLink support.
 
+All Dockerfile files of supported versions can be found at https://github.com/tomitribe/docker-tomee
+
 # How to use this image.
 
 Run the default TomEE server (`CMD ["catalina.sh", "run"]`):
@@ -43,3 +45,17 @@ The configuration files are available in `/usr/local/tomee/conf/`.  By default,
 no user is included in the "manager-gui" role required to operate the
 "/manager/html" web application.   If you wish to use this app, you must define
 such a user in `tomcat-users.xml`.
+
+# Issues & Contributors
+
+Any issue can be notified to Tomitribe team by using next link  https://github.com/tomitribe/docker-tomee/issues
+
+Contributions are more than welcome and can be done by forking https://github.com/tomitribe/docker-tomee repository and sending a PR.
+
+Note that project contains three scripts which can be used to generate a _tomee_ version.
+
+The most important file is one called `Dockerfile.template` which is used as a based `Dockerfile`.
+
+# License
+
+Apache TomEE comes with an APL v2 version (http://www.apache.org/licenses/LICENSE-2.0) and all files provided to produce the Docker images are APL v2 as well.
