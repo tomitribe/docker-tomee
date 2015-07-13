@@ -8,7 +8,7 @@ We start with Apache Tomcat, add our jars and zip up the rest. The result is Tom
 
 Versions 1.X of Apache TomEE are Java EE 6 Web Profile certified.
 
-Versions 2.X of Apache TomEE are Java EE 7 Web Profile certified.
+Versions 7.X of Apache TomEE are Java EE 7 Web Profile certified.
 
 Apache TomEE comes with four different flavors, Web Profile, JAX-RS, Plus and Plume.
 
@@ -45,6 +45,11 @@ The configuration files are available in `/usr/local/tomee/conf/`.  By default,
 no user is included in the "manager-gui" role required to operate the
 "/manager/html" web application.   If you wish to use this app, you must define
 such a user in `tomcat-users.xml`.
+
+You can also use this image as base image in your Dockerfile file. 
+Then you can add your application by running next Dockerfile operation:
+
+ADD <locationofapplication>/<warfile> /usr/local/tomee/webapps/<warfile>
 
 # Issues & Contributors
 
