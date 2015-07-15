@@ -1,20 +1,23 @@
 FROM java:6-jre
 
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-# we comment all commands related to user creation since if we do this, war file cannot be deployed with volumes
-#RUN groupadd -r tomee && useradd -r --create-home -g tomee tomee
-
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
-#RUN chown tomee:tomee /usr/local/tomee
-WORKDIR /usr/local/tomee
-#USER tomee
 
+WORKDIR /usr/local/tomee
+
+RUN curl -SL http://www.apache.org/dist/tomee/KEYS -o KEYS \
+	&& gpg --import KEYS
+
+RUN curl -SL https://dist.apache.org/repos/dist/release/tomee/tomee-1.7.2/apache-tomee-1.7.2-webprofile.tar.gz.asc -o tomee.tar.gz.asc
 
 RUN curl -SL http://apache.rediris.es/tomee/tomee-1.7.2/apache-tomee-1.7.2-webprofile.tar.gz -o tomee.tar.gz \
-	&& tar -xvf tomee.tar.gz --strip-components=1 \
+	&& tar -zxvf tomee.tar.gz  \
+	&& gpg --verify tomee.tar.gz.asc tomee.tar.gz \
+	&& mv apache-tomee-webprofile-1.7.2/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-webprofile-1.7.2 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
+
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
