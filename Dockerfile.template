@@ -22,11 +22,11 @@ RUN set -xe \
 		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	done
 
-RUN curl -SL https://dist.apache.org/repos/dist/release/tomee/tomee-%VERSION%/apache-tomee-%VERSION%-%FLAVOR%.tar.gz.asc -o tomee.tar.gz.asc
-
-RUN curl -SL http://apache.rediris.es/tomee/tomee-%VERSION%/apache-tomee-%VERSION%-%FLAVOR%.tar.gz -o tomee.tar.gz \
-	&& tar -zxvf tomee.tar.gz  \
+RUN set -x \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-%VERSION%/apache-tomee-%VERSION%-%FLAVOR%.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL http://apache.rediris.es/tomee/tomee-%VERSION%/apache-tomee-%VERSION%-%FLAVOR%.tar.gz -o tomee.tar.gz \
 	&& gpg --verify tomee.tar.gz.asc tomee.tar.gz \
+	&& tar -zxf tomee.tar.gz \
 	&& mv apache-tomee-%FLAVOR%-%VERSION%/* /usr/local/tomee \
 	&& rm -Rf apache-tomee-%FLAVOR%-%VERSION% \
 	&& rm bin/*.bat \
