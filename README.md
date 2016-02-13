@@ -23,7 +23,7 @@ All Dockerfile files of supported versions can be found at https://github.com/to
 
 Run the default TomEE server (`CMD ["catalina.sh", "run"]`):
 
-    docker run -it --rm tomee/<flavor>:<tomeeversion>-<java-version>-
+    docker run -it --rm tomee/<flavor>:<tomeeversion>-<java-version>
 
 For example:
 
@@ -49,7 +49,7 @@ such a user in `tomcat-users.xml`.
 You can also use this image as base image in your Dockerfile file. 
 Then you can add your application by running next Dockerfile operation:
 
-ADD <locationofapplication>/<warfile> /usr/local/tomee/webapps/<warfile>
+    ADD <locationofapplication>/<warfile> /usr/local/tomee/webapps/<warfile>
 
 # Issues & Contributors
 
