@@ -25,7 +25,7 @@ RUN set -xe \
 RUN set -x \
 	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-1.7.3/apache-tomee-1.7.3-jaxrs.tar.gz.asc -o tomee.tar.gz.asc \
 	&& curl -fSL http://apache.rediris.es/tomee/tomee-1.7.3/apache-tomee-1.7.3-jaxrs.tar.gz -o tomee.tar.gz \
-	&& gpg --verify tomee.tar.gz.asc tomee.tar.gz \
+	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
 	&& mv apache-tomee-jaxrs-1.7.3/* /usr/local/tomee \
 	&& rm -Rf apache-tomee-jaxrs-1.7.3 \
