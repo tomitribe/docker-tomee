@@ -24,12 +24,12 @@ RUN set -xe \
 	done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-7.0.0/apache-tomee-7.0.0-plus.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL http://apache.rediris.es/tomee/tomee-7.0.0/apache-tomee-7.0.0-plus.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-7.0.1/apache-tomee-7.0.1-plus.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL http://apache.rediris.es/tomee/tomee-7.0.1/apache-tomee-7.0.1-plus.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plus-7.0.0/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plus-7.0.0 \
+	&& mv apache-tomee-plus-7.0.1/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-plus-7.0.1 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
