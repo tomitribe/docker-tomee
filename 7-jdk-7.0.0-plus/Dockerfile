@@ -1,4 +1,4 @@
-FROM java:7-jdk
+FROM openjdk:7-jdk
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
