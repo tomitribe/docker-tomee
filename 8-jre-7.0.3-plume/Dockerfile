@@ -5,25 +5,24 @@ RUN mkdir -p /usr/local/tomee
 
 WORKDIR /usr/local/tomee
 
-# curl 'https://www.apache.org/dist/tomee/KEYS' 2>&1 | grep '^pub' | sed 's#pub.*/\([^ ]*\) .*#\1#'
+# curl -fsSL 'https://www.apache.org/dist/tomee/KEYS' | awk -F ' = ' '$1 ~ /^ +Key fingerprint$/ { gsub(" ", "", $2); print $2 }' | sort -u
 ENV GPG_KEYS \
-    9A0B1183 \
-    9CF64915 \
-    D297D428 \
-    8D050EEF \
-    97ABD9B9 \
-    6D545F97 \
-    B863A7C1 \
-    2FDB81B1 \
-    12F3E1DD \
-    5BE6E4C1 \
-    043F71D8 \
-    2678363C
-
+    BDD0BBEB753192957EFC5F896A62FC8EF17D8FEF \
+    223D3A74B068ECA354DC385CE126833F9CF64915 \
+    7A2744A8A9AAF063C23EB7868EBE7DBE8D050EEF \
+    82D8419BA697F0E7FB85916EE91287822FDB81B1 \
+    9056B710F1E332780DE7AF34CBAEBE39A46C4CA1 \
+    A57DAF81C1B69921F4BA8723A8DE0A4DB863A7C1 \
+    B7574789F5018690043E6DD9C212662E12F3E1DD \
+    B8B301E6105DF628076BD92C5483E55897ABD9B9 \
+    DBCCD103B8B24F86FFAAB025C8BB472CD297D428 \
+    F067B8140F5DD80E1D3B5D92318242FE9A0B1183 \
+    FAA603D58B1BA4EDF65896D0ED340E0E6D545F97
 RUN set -xe \
-	&& for key in $GPG_KEYS; do \
-		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-	done
+    && for key in $GPG_KEYS; do \
+        gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+    done
+
 
 RUN set -x \
 	&& curl -fSL https://repo1.maven.org/maven2/org/apache/tomee/apache-tomee/7.0.3/apache-tomee-7.0.3-plume.tar.gz.asc -o tomee.tar.gz.asc \
