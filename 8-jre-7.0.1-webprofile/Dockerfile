@@ -25,8 +25,8 @@ RUN set -xe \
 
 
 RUN set -x \
-	&& curl -fSL https://repo1.maven.org/maven2/org/apache/tomee/apache-tomee/7.0.1/apache-tomee-7.0.1-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://repo1.maven.org/maven2/org/apache/tomee/apache-tomee/7.0.1/apache-tomee-7.0.1-webprofile.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.1/apache-tomee-7.0.1-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.1/apache-tomee-7.0.1-webprofile.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
 	&& mv apache-tomee-webprofile-7.0.1/* /usr/local/tomee \
