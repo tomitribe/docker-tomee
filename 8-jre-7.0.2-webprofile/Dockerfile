@@ -21,7 +21,7 @@ ENV GPG_KEYS \
     DBCCD103B8B24F86FFAAB025C8BB472CD297D428 \
     F067B8140F5DD80E1D3B5D92318242FE9A0B1183 \
     FAA603D58B1BA4EDF65896D0ED340E0E6D545F97
-
+  
 RUN set -xe \
     && for key in $GPG_KEYS; do \
         gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
@@ -29,12 +29,12 @@ RUN set -xe \
 
 
 RUN set -x \
-	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.3/apache-tomee-7.0.3-plus.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.3/apache-tomee-7.0.3-plus.tar.gz -o tomee.tar.gz \
-    && gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.2/apache-tomee-7.0.2-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.2/apache-tomee-7.0.2-webprofile.tar.gz -o tomee.tar.gz \
+	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plus-7.0.3/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plus-7.0.3 \
+	&& mv apache-tomee-webprofile-7.0.2/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-webprofile-7.0.2 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
