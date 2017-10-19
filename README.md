@@ -23,20 +23,16 @@ All Dockerfile files of supported versions can be found at https://github.com/to
 
 Run the default TomEE server (`CMD ["catalina.sh", "run"]`):
 
-    docker run -it --rm tomee/<flavor>:<tomeeversion>-<java-version>
+    docker run -it --rm tomee:<java-version>\-<tomeeversion>\-<flavour>
 
 For example:
 
-    docker run -it --rm tomee/webprofile:1.7.2-jre7
-
-or
-
-    docker run -it --rm tomee/jaxrs:1.7.2-jre7
+    docker run -it --rm tomee:8-jre-7.0.3-webprofile
 
 You can test it by visiting `http://container-ip:8080` in a browser or, if you
 need access outside the host, on port 8888:
 
-    docker run -it --rm -p 8888:8080 tomee/plus:1.7.2-jre7
+    docker run -it --rm -p 8888:8080 tomee:8-jre-7.0.3-webprofile
 
 You can then go to `http://localhost:8888` or `http://host-ip:8888` in a
 browser.
