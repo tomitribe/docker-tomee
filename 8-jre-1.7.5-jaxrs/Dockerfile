@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:8-jre
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
@@ -24,12 +24,12 @@ RUN set -xe \
 	done
 
 RUN set -x \
-	&& curl -fSL http://repo.maven.apache.org/maven2/org/apache/openejb/apache-tomee/1.7.5/apache-tomee-1.7.5-plus.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL http://repo.maven.apache.org/maven2/org/apache/openejb/apache-tomee/1.7.5/apache-tomee-1.7.5-plus.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-1.7.5/apache-tomee-1.7.5-jaxrs.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL http://apache.rediris.es/tomee/tomee-1.7.5/apache-tomee-1.7.5-jaxrs.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plus-1.7.5/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plus-1.7.5 \
+	&& mv apache-tomee-jaxrs-1.7.5/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-jaxrs-1.7.5 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
