@@ -49,7 +49,7 @@ Then you can add your application by running next Dockerfile operation:
 
 # Issues & Contributors
 
-Any issue can be notified to Tomitribe team by using next link  https://github.com/tomitribe/docker-tomee/issues
+Any issue can be notified to Tomitribe team by using next link **TBD**
 
 Contributions are more than welcome and can be done by forking https://github.com/tomitribe/docker-tomee repository and sending a PR.
 
