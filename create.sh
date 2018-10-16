@@ -1,6 +1,6 @@
 #!/bin/bash
 
-javas=(7-jdk 8-jdk)
+javas=(8-jre)
 
 for java in ${javas[*]}
 do

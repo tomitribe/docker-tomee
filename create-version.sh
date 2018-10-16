@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flavors=(webprofile jaxrs plus plume)
+flavors=(webprofile plus plume microprofile)
 
 for flavor in ${flavors[*]}
 do
