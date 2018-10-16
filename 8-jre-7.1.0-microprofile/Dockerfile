@@ -33,8 +33,8 @@ RUN set -x \
 	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.1.0/apache-tomee-7.1.0-microprofile.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-webprofile-7.1.0/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-webprofile-7.1.0 \
+	&& mv apache-tomee-microprofile-7.1.0/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-microprofile-7.1.0 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
