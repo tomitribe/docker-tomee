@@ -34,5 +34,11 @@ RUN set -x \
 	&& rm tomee.tar.gz*
 
 
-EXPOSE 8080
+EXPOSE 8080/tcp
+EXPOSÉ 8443/tcp
+
+VOLUME [/usr/local/tomee/logs] 
+VOLUME [/usr/local/tomee/conf] 
+VOLUME [/usr/local/tomee/webapps] 
+
 CMD ["catalina.sh", "run"]
