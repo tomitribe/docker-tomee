@@ -38,7 +38,7 @@ RUN set -x \
 
 
 EXPOSE 8080/tcp
-EXPOSÉ 8443/tcp
+EXPOSE 8443/tcp
 
 VOLUME [/usr/local/tomee/logs] 
 VOLUME [/usr/local/tomee/conf] 
