@@ -27,12 +27,12 @@ RUN set -xe \
     done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M1/apache-tomee-8.0.0-M1-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M1/apache-tomee-8.0.0-M1-webprofile.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-plus.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-plus.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-webprofile-8.0.0-M1/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-webprofile-8.0.0-M1 \
+	&& mv apache-tomee-plus-8.0.0-M2/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-plus-8.0.0-M2 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
