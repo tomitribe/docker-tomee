@@ -46,7 +46,7 @@ VOLUME [/usr/local/tomee/webapps]
 
 RUN sed -i '2i echo \"tomee:x:$(id -u):0:tomee user:${HOME}:/sbin/nologin\" >> /etc/passwd' /usr/local/tomee/bin/catalina.sh
 RUN chown -R 1001:0 /usr/local/tomee \
-    && chmod -R 775 /usr/local/tomee \
+    && chmod -R g=u /usr/local/tomee \
     && chmod g=u /etc/passwd
 
 CMD ["catalina.sh", "run"]
