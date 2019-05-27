@@ -21,9 +21,9 @@ ENV GPG_KEYS \
 
 RUN set -xe \
     && for key in $GPG_KEYS; do \
-        gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
-        gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-        gpg --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
+        gpg --no-tty --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
+        gpg --no-tty --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
+        gpg --no-tty --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
     done
 
 RUN set -x \
@@ -44,4 +44,11 @@ VOLUME [/usr/local/tomee/logs]
 VOLUME [/usr/local/tomee/conf] 
 VOLUME [/usr/local/tomee/webapps] 
 
+RUN sed -i '2i echo \"tomee:x:$(id -u):0:tomee user:${HOME}:/sbin/nologin\" >> /etc/passwd' /usr/local/tomee/bin/catalina.sh
+RUN chown -R 1001:0 /usr/local/tomee \
+    && chmod -R g=u /usr/local/tomee \
+    && chmod g=u /etc/passwd
+
 CMD ["catalina.sh", "run"]
+
+USER 1001
