@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:11-jre
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
@@ -17,7 +17,8 @@ ENV GPG_KEYS \
     DBCCD103B8B24F86FFAAB025C8BB472CD297D428 \
     F067B8140F5DD80E1D3B5D92318242FE9A0B1183 \
     FAA603D58B1BA4EDF65896D0ED340E0E6D545F97 \
-    C92604B0DEC5C62CFF5801E73D4683C24EDC64D1
+    C92604B0DEC5C62CFF5801E73D4683C24EDC64D1 \
+    294A395FFDC9FCF25A7E2BFDCF6FC99C2CC77782
 
 RUN set -xe \
     && for key in $GPG_KEYS; do \
@@ -27,12 +28,12 @@ RUN set -xe \
     done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-webprofile.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-plume.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-plume.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-webprofile-8.0.0-M2/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-webprofile-8.0.0-M2 \
+	&& mv apache-tomee-plume-8.0.0-M3/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-plume-8.0.0-M3 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
