@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:11-jre
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
@@ -17,22 +17,23 @@ ENV GPG_KEYS \
     DBCCD103B8B24F86FFAAB025C8BB472CD297D428 \
     F067B8140F5DD80E1D3B5D92318242FE9A0B1183 \
     FAA603D58B1BA4EDF65896D0ED340E0E6D545F97 \
-    C92604B0DEC5C62CFF5801E73D4683C24EDC64D1
+    C92604B0DEC5C62CFF5801E73D4683C24EDC64D1 \
+    294A395FFDC9FCF25A7E2BFDCF6FC99C2CC77782
 
 RUN set -xe \
     && for key in $GPG_KEYS; do \
-		gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
+        gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
         gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
         gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
     done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-plus.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M2/apache-tomee-8.0.0-M2-plus.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-microprofile.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-microprofile.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plus-8.0.0-M2/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plus-8.0.0-M2 \
+	&& mv apache-tomee-microprofile-8.0.0-M3/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-microprofile-8.0.0-M3 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
