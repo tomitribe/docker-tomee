@@ -1,4 +1,4 @@
-FROM openjdk:11.0-jdk
+FROM openjdk:8-jre
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
@@ -22,18 +22,18 @@ ENV GPG_KEYS \
 
 RUN set -xe \
     && for key in $GPG_KEYS; do \
-		gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
+        gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
         gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
         gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
     done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-plume.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-plume.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0/apache-tomee-8.0.0-microprofile.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0/apache-tomee-8.0.0-microprofile.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plume-8.0.0-M3/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plume-8.0.0-M3 \
+	&& mv apache-tomee-microprofile-8.0.0/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-microprofile-8.0.0 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 

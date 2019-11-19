@@ -1,4 +1,4 @@
-FROM openjdk:11.0-jdk
+FROM openjdk:8-jre
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
@@ -28,12 +28,12 @@ RUN set -xe \
     done
 
 RUN set -x \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0-M3/apache-tomee-8.0.0-M3-webprofile.tar.gz -o tomee.tar.gz \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0/apache-tomee-8.0.0-plume.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-8.0.0/apache-tomee-8.0.0-plume.tar.gz -o tomee.tar.gz \
 	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-webprofile-8.0.0-M3/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-webprofile-8.0.0-M3 \
+	&& mv apache-tomee-plume-8.0.0/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-plume-8.0.0 \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz*
 
