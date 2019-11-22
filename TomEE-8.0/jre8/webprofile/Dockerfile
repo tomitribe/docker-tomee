@@ -39,8 +39,9 @@ RUN set -x \
 	&& rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
 	&& rm bin/*.bat \
 	&& rm tomee.tar.gz* \
-	&& useradd tomee \
-	&& chown -R tomee:tomee /usr/local/tomee 
+	&& useradd -g root tomee \
+	&& chown -R tomee:root /usr/local/tomee \
+	&& chmod -R g=u /usr/local/tomee
 
 USER tomee
 EXPOSE 8080
