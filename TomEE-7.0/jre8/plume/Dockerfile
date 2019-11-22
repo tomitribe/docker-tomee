@@ -1,7 +1,5 @@
 FROM openjdk:8-jre
 
-ENV TOMEE_VER 7.0.6
-ENV TOMEE_BUILD plume
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
 
@@ -28,6 +26,9 @@ RUN set -xe \
         gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
         gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
     done
+
+ENV TOMEE_VER 7.0.6
+ENV TOMEE_BUILD plume
 
 RUN set -x \
 	&& curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \
