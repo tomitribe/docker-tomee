@@ -38,11 +38,11 @@ RUN set -x \
 	&& mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
 	&& rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
 	&& rm bin/*.bat \
-	&& rm tomee.tar.gz* \
-	&& useradd -g root tomee \
-	&& chown -R tomee:root /usr/local/tomee \
-	&& chmod -R g=u /usr/local/tomee
+	&& rm tomee.tar.gz*
+#	&& useradd -g root tomee \
+#	&& chown -R tomee:root /usr/local/tomee \
+#	&& chmod -R g=u /usr/local/tomee
 
-USER tomee
+#USER tomee
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
