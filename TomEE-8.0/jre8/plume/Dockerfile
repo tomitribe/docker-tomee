@@ -27,7 +27,7 @@ RUN set -xe \
         gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
     done
 
-ENV TOMEE_VER 8.0.0
+ENV TOMEE_VER 8.0.1
 ENV TOMEE_BUILD plume
 
 RUN set -x \
@@ -38,10 +38,11 @@ RUN set -x \
 	&& mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
 	&& rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
 	&& rm bin/*.bat \
-	&& rm tomee.tar.gz* \
-	&& useradd tomee \
-	&& chown -R tomee:tomee /usr/local/tomee 
+	&& rm tomee.tar.gz*
+#	&& useradd -g root tomee \
+#	&& chown -R tomee:root /usr/local/tomee \
+#	&& chmod -R g=u /usr/local/tomee
 
-USER tomee
+#USER tomee
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
