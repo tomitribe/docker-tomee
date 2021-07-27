@@ -39,6 +39,7 @@ RUN set -x \
 	&& rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
 	&& rm bin/*.bat \
 	&& rm bin/*.exe \
+	&& rm bin/*.tar.gz* \
 	&& rm tomee.tar.gz*
 #	&& useradd -g root tomee \
 #	&& chown -R tomee:root /usr/local/tomee \
