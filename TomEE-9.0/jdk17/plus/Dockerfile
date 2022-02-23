@@ -46,18 +46,17 @@ RUN set -xe; \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 8.0.10
-ENV TOMEE_BUILD webprofile
+ENV TOMEE_VER 9.0.0-M7
+ENV TOMEE_BUILD plus
 
 RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.sha512 -o tomee.tar.gz.sha512 \
-  && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
-  && gpg --batch --verify tomee.tar.gz.asc apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
-  && echo `cat tomee.tar.gz.sha512` | sha512sum -c - \
-  && tar -zxf apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
+  && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o tomee.tar.gz \
+  && gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
+  && echo `cat tomee.tar.gz.sha512` tomee.tar.gz | sha512sum -c - \
+  && tar -zxf tomee.tar.gz \
   && mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
-  && rm apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
   && rm bin/*.bat \
   && rm bin/*.exe \
@@ -67,4 +66,3 @@ RUN set -x \
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
-

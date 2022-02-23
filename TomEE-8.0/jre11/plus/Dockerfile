@@ -46,7 +46,7 @@ RUN set -xe; \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 8.0.9
+ENV TOMEE_VER 8.0.10
 ENV TOMEE_BUILD plus
 
 RUN set -x \
