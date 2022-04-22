@@ -41,12 +41,15 @@ RUN set -xe; \
   626C542EDA7C113814B77AF09C04914D63645D20 \
   # Jean-Louis Monteiro (CODE SIGNING KEY) <jlmonteiro@apache.org>
   3948829384B269D333CC5B98358807C52B4B0E23 \
+  # Richard Zowalla <richard.zowalla@hs-heilbronn.de>
+  B83D15E72253ED1104EB4FBBDAB472F0E5B8A431 \
+
   ; do \
     gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 8.0.10
+ENV TOMEE_VER 8.0.11
 ENV TOMEE_BUILD webprofile
 
 RUN set -x \
@@ -54,7 +57,8 @@ RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.sha512 -o tomee.tar.gz.sha512 \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && gpg --batch --verify tomee.tar.gz.asc apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
-  && echo `cat tomee.tar.gz.sha512` | sha512sum -c - \
+  #&& echo `cat tomee.tar.gz.sha512` | sha512sum -c - \
+  && echo `cat tomee.tar.gz.sha512` apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz | sha512sum -c - \
   && tar -zxf apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
   && rm apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
