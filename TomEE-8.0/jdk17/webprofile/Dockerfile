@@ -41,7 +41,7 @@ RUN set -xe; \
   626C542EDA7C113814B77AF09C04914D63645D20 \
   # Jean-Louis Monteiro (CODE SIGNING KEY) <jlmonteiro@apache.org>
   3948829384B269D333CC5B98358807C52B4B0E23 \
-  # Richard Zowalla <richard.zowalla@hs-heilbronn.de>
+  # Richard Zowalla (Code Signing Key) <rzo1@apache.org>
   B83D15E72253ED1104EB4FBBDAB472F0E5B8A431 \
 
   ; do \
