@@ -1,9 +1,13 @@
-FROM openjdk:11-jre
+FROM eclipse-temurin:11-jre-focal
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
 
 WORKDIR /usr/local/tomee
+
+RUN apt-get update \
+  && apt-get install -y  gpg \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN set -xe; \
   for key in \
@@ -41,22 +45,26 @@ RUN set -xe; \
   626C542EDA7C113814B77AF09C04914D63645D20 \
   # Jean-Louis Monteiro (CODE SIGNING KEY) <jlmonteiro@apache.org>
   3948829384B269D333CC5B98358807C52B4B0E23 \
+  # Richard Zowalla (Code Signing Key) <rzo1@apache.org>
+  B83D15E72253ED1104EB4FBBDAB472F0E5B8A431 \
   ; do \
     gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
 ENV TOMEE_VER 9.0.0-M7
-ENV TOMEE_BUILD plume
+ENV TOMEE_BUILD plus
 
 RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.sha512 -o tomee.tar.gz.sha512 \
-  && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o tomee.tar.gz \
-  && gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
-  && echo `cat tomee.tar.gz.sha512` tomee.tar.gz | sha512sum -c - \
-  && tar -zxf tomee.tar.gz \
+  && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
+  && gpg --batch --verify tomee.tar.gz.asc apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
+  #&& echo `cat tomee.tar.gz.sha512` | sha512sum -c - \
+  && echo `cat tomee.tar.gz.sha512` apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz | sha512sum -c - \
+  && tar -zxf apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
+  && rm apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && rm -Rf apache-tomee-${TOMEE_BUILD}-${TOMEE_VER} \
   && rm bin/*.bat \
   && rm bin/*.exe \
@@ -66,3 +74,4 @@ RUN set -x \
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
+
