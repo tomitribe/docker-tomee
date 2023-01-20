@@ -1,4 +1,4 @@
-FROM ibm-semeru-runtimes:open-11-jre-focal
+FROM ibm-semeru-runtimes:open-11-jre-jammy
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
