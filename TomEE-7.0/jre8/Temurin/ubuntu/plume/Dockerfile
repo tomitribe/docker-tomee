@@ -1,9 +1,13 @@
-FROM openjdk:8-jre-bullseye
+FROM eclipse-temurin:8-jre-focal
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee
 
 WORKDIR /usr/local/tomee
+
+RUN apt-get update \
+  && apt-get install -y  gpg \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN set -xe; \
   for key in \
@@ -48,16 +52,15 @@ RUN set -xe; \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 8.0.13
-ENV TOMEE_BUILD plus
+ENV TOMEE_VER 7.0.9
+ENV TOMEE_BUILD plume
 
 RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.sha512 -o tomee.tar.gz.sha512 \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz -o apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && gpg --batch --verify tomee.tar.gz.asc apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
-  && echo `cat tomee.tar.gz.sha512` | sha512sum -c - \
-  #&& echo `cat tomee.tar.gz.sha512` apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz | sha512sum -c - \
+  && echo `cat tomee.tar.gz.sha512` apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz | sha512sum -c - \
   && tar -zxf apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
   && mv apache-tomee-${TOMEE_BUILD}-${TOMEE_VER}/* /usr/local/tomee \
   && rm apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz \
@@ -70,4 +73,3 @@ RUN set -x \
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
-
