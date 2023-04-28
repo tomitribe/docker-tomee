@@ -6,7 +6,7 @@ RUN mkdir -p /usr/local/tomee
 WORKDIR /usr/local/tomee
 
 RUN apt-get update \
-  && apt-get install -y  gpg \
+  && apt-get install -y --no-install-recommends gpg dirmngr \
   && rm -rf /var/lib/apt/lists/*
 
 RUN set -xe; \
