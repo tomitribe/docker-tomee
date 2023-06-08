@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17-jre-focal
 
 ENV PATH /usr/local/tomee/bin:$PATH
-RUN mkdir -p /usr/local/tomee
+RUN mkdir -p /usr/local/tomee ~/.gnupg
 
 WORKDIR /usr/local/tomee
 
