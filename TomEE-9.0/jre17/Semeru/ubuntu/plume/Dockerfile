@@ -1,7 +1,7 @@
 FROM ibm-semeru-runtimes:open-17-jre-jammy
 
 ENV PATH /usr/local/tomee/bin:$PATH
-RUN mkdir -p /usr/local/tomee
+RUN mkdir -p /usr/local/tomee ~/.gnupg
 
 WORKDIR /usr/local/tomee
 
