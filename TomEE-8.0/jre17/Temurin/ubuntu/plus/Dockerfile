@@ -47,12 +47,14 @@ RUN set -xe; \
   3948829384B269D333CC5B98358807C52B4B0E23 \
   # Richard Zowalla (Code Signing Key) <rzo1@apache.org>
   B83D15E72253ED1104EB4FBBDAB472F0E5B8A431 \
+  # Jonathan S. Fisher  (Code Signing Key) <jfisher@apache.org> 
+  871638A21A7F2C38066471420306A354336B4F0D \
   ; do \
     gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 8.0.15
+ENV TOMEE_VER 8.0.16
 ENV TOMEE_BUILD plus
 
 RUN set -x \
