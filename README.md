@@ -27,12 +27,12 @@ Run the default TomEE server (`CMD ["catalina.sh", "run"]`):
 
 For example:
 
-    docker run -it --rm tomee:8-jre-7.0.3-webprofile
+    docker run -it --rm tomee:9-jre17-alpine-webprofile
 
 You can test it by visiting `http://container-ip:8080` in a browser or, if you
 need access outside the host, on port 8888:
 
-    docker run -it --rm -p 8888:8080 tomee:8-jre-7.0.3-webprofile
+    docker run -it --rm -p 8888:8080 tomee:9-jre17-alpine-webprofile
 
 You can then go to `http://localhost:8888` or `http://host-ip:8888` in a
 browser.
