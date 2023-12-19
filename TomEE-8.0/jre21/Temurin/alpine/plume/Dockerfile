@@ -72,6 +72,6 @@ RUN set -x \
   && rm tomee.tar.gz.asc \
   && rm tomee.tar.gz*
 
-EXPOSE 8585
+EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
