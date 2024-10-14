@@ -49,12 +49,14 @@ RUN set -xe; \
   B83D15E72253ED1104EB4FBBDAB472F0E5B8A431 \
   # Jonathan S. Fisher  (Code Signing Key) <jfisher@apache.org> 
   871638A21A7F2C38066471420306A354336B4F0D \
+  # Markus Jung (CODE SIGNING KEY) <jungm@apache.org>
+  85FBBE98D6C37CDA8A7D8FF9F9FF83A48D339D37 \
   ; do \
     gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 10.0.0-M2
+ENV TOMEE_VER 10.0.0-M3
 ENV TOMEE_BUILD microprofile
 
 RUN set -x \
