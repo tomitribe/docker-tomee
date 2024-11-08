@@ -1,4 +1,4 @@
-FROM ibm-semeru-runtimes:open-17-jre-jammy
+FROM ibm-semeru-runtimes:open-21-jre-jammy
 
 ENV PATH /usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee ~/.gnupg
