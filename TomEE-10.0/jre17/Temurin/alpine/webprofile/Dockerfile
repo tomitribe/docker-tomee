@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jre-alpine
 
-ENV PATH /usr/local/tomee/bin:$PATH
+ENV PATH=/usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee ~/.gnupg
 
 WORKDIR /usr/local/tomee
@@ -55,8 +55,8 @@ RUN set -xe; \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER 10.0.0-M3
-ENV TOMEE_BUILD webprofile
+ENV TOMEE_VER=10.0.0
+ENV TOMEE_BUILD=webprofile
 
 RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \

@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-noble
+FROM eclipse-temurin:21-jre-noble
 
 ENV PATH=/usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee ~/.gnupg

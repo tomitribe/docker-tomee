@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-noble
+FROM ibm-semeru-runtimes:open-21-jre-jammy
 
 ENV PATH=/usr/local/tomee/bin:$PATH
 RUN mkdir -p /usr/local/tomee ~/.gnupg
@@ -57,7 +57,7 @@ RUN set -xe; \
   done
 
 ENV TOMEE_VER=10.0.0
-ENV TOMEE_BUILD=plus
+ENV TOMEE_BUILD=microprofile
 
 RUN set -x \
   && curl -fSL https://dist.apache.org/repos/dist/release/tomee/tomee-${TOMEE_VER}/apache-tomee-${TOMEE_VER}-${TOMEE_BUILD}.tar.gz.asc -o tomee.tar.gz.asc \
