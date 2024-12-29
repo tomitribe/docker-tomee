@@ -5,7 +5,7 @@ RUN mkdir -p /usr/local/tomee ~/.gnupg
 
 WORKDIR /usr/local/tomee
 
-RUN apk add --no-cache gpg gpg-agent gpg-agent dirmngr curl \
+RUN apk add --no-cache gpg gpg-agent dirmngr curl \
   && rm -rf /var/cache/apk/*
 
 RUN set -xe; \
