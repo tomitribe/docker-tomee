@@ -59,7 +59,7 @@ RUN set -xe; \
 ENV TOMEE_VER=10.1.0
 ENV TOMEE_BUILD=microprofile
 
-RUN set -ex; \
+RUN set -eux; \
 	ddist() { \
 		local f="$1"; shift; \
 		local distFile="$1"; shift; \
