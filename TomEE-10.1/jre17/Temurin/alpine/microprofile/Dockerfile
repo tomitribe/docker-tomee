@@ -55,7 +55,7 @@ RUN set -xe; \
     gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
   done
 
-ENV TOMEE_VER=10.1.1
+ENV TOMEE_VER=10.1.2
 ENV TOMEE_BUILD=microprofile
 
 RUN set -eux; \
